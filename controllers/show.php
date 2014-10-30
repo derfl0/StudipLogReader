@@ -42,6 +42,19 @@ class ShowController extends StudipController {
         $this->setInfoBoxImage('infobox/archiv.jpg');
     }
 
+    public function delete_action($id) {
+        $this->log = LogReader::find($id);
+
+        if (Request::submitted('confirm')) {
+            $this->log->delete();
+            $this->redirect('show/index');
+        }
+
+        if (Request::submitted('abort')) {
+            $this->redirect('show/index');
+        }
+    }
+
     private function loadNavigation() {
         Navigation::addItem('/admin/logreaderplugin/overview', new AutoNavigation(_('Übersicht'), $this->url_for('show')));
         $this->loadLogs();
