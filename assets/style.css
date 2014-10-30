@@ -1,6 +1,6 @@
 p.entry {
     font-family: monospace;
-    line-height: 0;
+    margin: 0;
 }
 
 a.log {
