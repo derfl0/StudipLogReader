@@ -36,9 +36,15 @@ class ShowController extends StudipController {
 
     public function view_action($id) {
         $this->log = $this->logs->find($id);
+        
+        $this->lines = count($this->log->file);
+        $this->from = Request::int('from', 0);
+        $this->to = Request::int('to', min(array($this->lines, 1000)));
 
         // Set infobox
         $this->addToInfobox(_('Suchen'), '<input type="text" class="content_search">');
+        $this->addToInfobox(_('Ausgabe'), '<form><label>'._('von').'<input style="width: 200px" type="text" name="from" value="'.$this->from.'"></label><label>'._('bis').'<input style="width: 200px" type="text" name="to" value="'.$this->to.'"></label>'.\Studip\Button::create(_('Anzeigen')).'</form>');
+        $this->addToInfobox(_('Zeilen'), count($this->log->file));
         $this->setInfoBoxImage('infobox/archiv.jpg');
     }
 

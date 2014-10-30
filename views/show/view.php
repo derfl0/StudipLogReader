@@ -1,4 +1,4 @@
 <h3><?= htmlReady($log->name) ?></h3>
-<? foreach (array_slice($log->file, 0, 1000) as $row): ?>
+<? foreach (array_slice($log->file, $from, $to) as $row): ?>
     <p class="entry"><?= htmlReady($row) ?></p>
 <? endforeach; ?>
