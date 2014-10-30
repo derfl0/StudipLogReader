@@ -10,7 +10,7 @@
                 <?= htmlReady($log->name) ?>
             <? endif; ?>
 
-            <a href="<?= $controller->url_for('show/edit/' . $log->id) ?>">
+            <a rel="lightbox" href="<?= $controller->url_for('show/edit/' . $log->id) ?>">
                 <?= Assets::img('icons/16/blue/edit.png') ?>
             </a>
         </article>
