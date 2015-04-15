@@ -19,9 +19,11 @@ class ShowController extends StudipController {
 
     public function index_action() {
 
-        // Set infobox
-        $this->addToInfobox(_('Aktionen'), '<a rel="lightbox" href=' . $this->url_for('show/edit') . '>' . _('Neuen Log hinzufügen') . '</a>');
-        $this->setInfoBoxImage('infobox/archiv.jpg');
+        // Set sidebar
+        $sidebar = Sidebar::Get();
+        $actions = new ActionsWidget();
+        $actions->addLink( _('Neuen Log hinzufügen'), $this->url_for('show/edit'), 'icons/16/blue/add.png')->asDialog('size=auto');
+        $sidebar->addWidget($actions);
     }
 
     public function edit_action($id = null) {
@@ -41,11 +43,23 @@ class ShowController extends StudipController {
         $this->from = Request::int('from', 0);
         $this->to = Request::int('to', min(array($this->lines, 1000)));
 
-        // Set infobox
-        $this->addToInfobox(_('Suchen'), '<input type="text" class="content_search">');
-        $this->addToInfobox(_('Ausgabe'), '<form><label>'._('von').'<input style="width: 200px" type="text" name="from" value="'.$this->from.'"></label><label>'._('bis').'<input style="width: 200px" type="text" name="to" value="'.$this->to.'"></label>'.\Studip\Button::create(_('Anzeigen')).'</form>');
-        $this->addToInfobox(_('Zeilen'), count($this->log->file));
-        $this->setInfoBoxImage('infobox/archiv.jpg');
+        // Set sidebar
+        $sidebar = Sidebar::Get();
+        
+        $search = new SearchWidget($this->url_for('show/view'));
+        $search->addNeedle(_('Suche'), 'log_search', true);
+        $sidebar->addWidget($search);
+        
+        $info = new SidebarWidget();
+        $info->setTitle('Zeilen');
+        $info->addElement(new WidgetElement(count($this->log->file)));
+        $sidebar->addWidget($info);
+        
+        $select = new SidebarWidget();
+        $select->setTitle('Ausgabe');
+        $form = new WidgetElement('<form><label>'._('von').' <input style="width: 90px" type="text" name="from" value="'.$this->from.'"></label><label> '._('bis').' <input style="width: 90px" type="text" name="to" value="'.$this->to.'"></label>'.\Studip\Button::create(_('Anzeigen')).'</form>');
+        $select->addElement($form);
+        $sidebar->addWidget($select);
     }
 
     public function delete_action($id) {

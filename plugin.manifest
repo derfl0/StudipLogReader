@@ -1,7 +1,7 @@
 pluginname=LogReader
 pluginclassname=LogreaderPlugin
 origin=intelec
-version=1
-studipMinVersion=3.0
+version=1.1
+studipMinVersion=3.1
 dbscheme=assets/install.sql
 uninstalldbscheme=assets/uninstall.sql

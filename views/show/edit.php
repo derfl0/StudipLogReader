@@ -9,6 +9,6 @@
         <input placeholder="/var/logs/index.log" type='text' name='logreader[location]' value='<?= $log->location ?>'>
     </label>
     
-    <?= \Studip\Button::create(_('Speichern'), 'store') ?>
+    <?= \Studip\Button::create(_('Speichern'), 'store', array('data-dialog-button' => true)) ?>
 
 </form>

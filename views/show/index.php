@@ -10,10 +10,10 @@
                 <?= htmlReady($log->name) ?>
             <? endif; ?>
 
-            <a rel="lightbox" href="<?= $controller->url_for('show/edit/' . $log->id) ?>">
+            <a data-dialog="size=auto" title="<?= htmlReady($log->name) ?>" href="<?= $controller->url_for('show/edit/' . $log->id) ?>">
                 <?= Assets::img('icons/16/blue/edit.png') ?>
             </a>
-            <a rel="lightbox" href="<?= $controller->url_for('show/delete</' . $log->id) ?>">
+            <a data-dialog="size=auto" title="<?= htmlReady($log->name) ?>"  href="<?= $controller->url_for('show/delete/' . $log->id) ?>">
                 <?= Assets::img('icons/16/blue/trash.png') ?>
             </a>
         </article>
