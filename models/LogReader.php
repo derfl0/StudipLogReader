@@ -34,6 +34,11 @@ class LogReader extends SimpleORMap {
 
     public function getFile() {
         
+        // Check if location is still active
+        if ($this->real_location && !file_exists($this->real_location)) {
+            $this->real_location = null;
+        }
+        
         // Fallback if no file
         if (!$this->real_location) {
             $this->store();
